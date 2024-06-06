@@ -100,3 +100,4 @@ df_word_freq = df_word_freq.sort_values(by='Frequency', ascending=False)
 print(df_word_freq.head(20))
 # 将DataFrame保存为CSV文件
 df_word_freq.to_csv('word_frequency.csv', index=False, encoding='utf-8-sig')
+
