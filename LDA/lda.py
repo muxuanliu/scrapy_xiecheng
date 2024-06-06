@@ -1,3 +1,5 @@
+# jupternotebook中运行
+
 from gensim.models import LdaModel
 import pandas as pd
 from gensim.corpora import Dictionary
@@ -40,7 +42,16 @@ for i in lda.get_document_topics(corpus)[:]:
     bz = listj.index(max(listj))
     # print(i[bz][0])
 
-# 使用pyLDAvis准备可视化
+import pyLDAvis.gensim_models  # 导入正确的子模块
+
+# 如果您在 Jupyter Notebook 中工作
+pyLDAvis.enable_notebook()
+
+# 使用gensim_models子模块来准备数据进行可视化
 vis = pyLDAvis.gensim_models.prepare(lda, corpus, dictionary)
 
+# 在 Jupyter Notebook 或其他支持 IPython 显示的环境下展示可视化结果
 pyLDAvis.display(vis)
+
+# 保存可视化结果为HTML文件
+pyLDAvis.save_html(vis, 'D:/Pycharm/scrapy_xiecheng/LDA/6topic.html')
