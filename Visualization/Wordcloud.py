@@ -4,11 +4,15 @@ import matplotlib.pyplot as plt
 from collections import Counter
 from wordcloud import WordCloud
 import re
+import thulac
 import jieba as jb
 # 检查文本编码格式
 import chardet
 
 font_path = 'C:\\Windows\\Fonts\\SimHei.ttf'
+
+# 清华大学分词模型实例化 ，seg_only不标注词性，filt 过滤无意义词
+thu1 = thulac.thulac(seg_only=True,filt=True)  #默认模式
 
 plt.rcParams['font.sans-serif'] = ['SimHei']
 
@@ -51,6 +55,8 @@ df['cut_review'] = df['clean_data'].apply(lambda x: " ".join([w for w in list(jb
 
 # 合并所有行的'data'列到一个单一的字符串
 all_text = " ".join(df['cut_review'])
+
+df.to_csv('result.csv', index=False, header=False, encoding='utf-8-sig')
 
 # 生成词云图
 wordcloud = WordCloud(width=800, height=400, background_color='white', font_path=font_path).generate(all_text)
